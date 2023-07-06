@@ -1,0 +1,63 @@
+# Уникальный скрипт на языке Ruby
+
+# Определение класса "Студент"
+class Student
+  attr_accessor :name, :age, :grades
+
+  # Конструктор класса
+  def initialize(name, age)
+    @name = name
+    @age = age
+    @grades = []
+  end
+
+  # Метод для добавления оценки студенту
+  def add_grade(grade)
+    @grades << grade
+  end
+
+  # Метод для подсчета среднего балла студента
+  def average_grade
+    sum = @grades.reduce(0) { |sum, grade| sum + grade }
+    sum / @grades.length.to_f
+  end
+
+  # Метод для вывода информации о студенте
+  def display_info
+    puts "Имя: #{@name}"
+    puts "Возраст: #{@age}"
+    puts "Оценки: #{@grades.join(', ')}"
+    puts "Средний балл: #{average_grade}"
+  end
+end
+
+# Создание списка студентов
+students = []
+students << Student.new("Иванов Иван", 20)
+students << Student.new("Петров Петр", 22)
+students << Student.new("Сидорова Анна", 21)
+
+# Добавление оценок студентам
+students[0].add_grade(4)
+students[0].add_grade(5)
+students[0].add_grade(3)
+
+students[1].add_grade(5)
+students[1].add_grade(5)
+students[1].add_grade(4)
+
+students[2].add_grade(4)
+students[2].add_grade(3)
+students[2].add_grade(4)
+
+# Вывод информации о каждом студенте
+students.each do |student|
+  student.display_info
+  puts "-" * 20
+end
+
+# Подсчет среднего балла всех студентов
+total_average_grade = students.reduce(0) { |sum, student| sum + student.average_grade }
+overall_average_grade = total_average_grade / students.length.to_f
+
+puts "Средний балл по группе: #{overall_average_grade}"
